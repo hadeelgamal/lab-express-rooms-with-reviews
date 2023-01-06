@@ -1,0 +1,12 @@
+{{#if fullName}}
+  <h2>Welcome, {{ fullName }}!</h2>
+  <p>This is your profile page my friend!</p>
+  <button>
+    <a href="/auth/profile">Reload the page</a>
+  </button>
+   <button>
+    <a href="/rooms/create-room">Create a Room</a>
+  </button>
+{{else}}
+  <p>Still no logged in user, sorry!</p>
+{{/if}}
