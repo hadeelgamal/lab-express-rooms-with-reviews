@@ -34,7 +34,7 @@ router.post("/signup", async (req, res) => {
 
   User.create({ fullName, email, password: passwordHash })
     .then((newUser) => {
-      req.session.currentUser = { newUser };
+      req.session.currentUser = newUser;
       res.redirect(`/auth/profile`);
     })
     .catch((err) => console.log(err));
@@ -67,8 +67,8 @@ router.post("/login", (req, res) => {
         return;
       } else if (bcrypt.compareSync(password, user.password)) {
        
-        const { fullName, email } = user;
-        req.session.currentUser = { fullName, email }; // creating the property currentUser
+        const { fullName, email, id } = user;
+        req.session.currentUser = { fullName, email, id }; // creating the property currentUser
         res.redirect("/auth/profile");
       } else {
         // if password is incorect
@@ -79,7 +79,7 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/profile", (req, res) => {
-  console.log(req.session.currentUser);
+  console.log(req.session);
   res.render("auth/profile", req.session.currentUser);
 });
 
